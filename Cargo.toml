@@ -1,0 +1,34 @@
+[package]
+name = "survival-tiles"
+version = "0.1.0"
+authors = ["Walter Pearce <jaynus@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+nalgebra = "^0.16"
+failure = "*"
+serde = { version = "*", optional = true, features = ["derive"]}
+serde_cbor = { version = "*", optional = true }
+libflate = { version = "*", optional = true }
+rand = "*"
+tiled = { path = "../rs-tiled", optional = true }
+ron = { version = "*", optional = true }
+clap = "*"
+
+[dev-dependencies]
+pretty_assertions = "*"
+
+[features]
+default = [ "serialize", "tiled_format", "amethyst" ]
+amethyst = [ "ron" ]
+tiled_format = [ "tiled" ]
+serialize = [ "serde", "nalgebra/serde-serialize", "serde_cbor", "libflate" ]
+unbounded = []
+
+[lib]
+name = "survival_tiles"
+path = "src/lib.rs"
+
+[[bin]]
+name = "survival_tiles_tool"
+path = "src/bin.rs"
